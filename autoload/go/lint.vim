@@ -264,7 +264,7 @@ function! s:lint_job(args, autosave)
     " run when the listtype is locationlist so that the location list for the
     " correct window will be populated.
     if self.listtype == 'locationlist'
-      call win_gotoid(self.winid)
+      "call win_gotoid(self.winid)
     endif
 
     let l:errorformat = '%f:%l:%c:%t%*[^:]:\ %m,%f:%l::%t%*[^:]:\ %m'
@@ -279,7 +279,7 @@ function! s:lint_job(args, autosave)
     " start of this function avoids the perception that the quickfix window
     " steals focus when linting takes a while.
     if self.autosave
-      call win_gotoid(self.winid)
+      "call win_gotoid(self.winid)
     endif
 
     if go#config#EchoCommandInfo()

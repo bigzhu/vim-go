@@ -26,6 +26,7 @@ function! go#list#Window(listtype, ...) abort
 
   if a:listtype == "locationlist"
     exe 'lopen ' . height
+    exe '2wincmd w'
   else
     exe 'copen ' . height
   endif
