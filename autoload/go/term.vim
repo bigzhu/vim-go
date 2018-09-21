@@ -46,7 +46,7 @@ function! go#term#newmode(bang, cmd, mode) abort
         \ 'on_stdout': function('s:on_stdout', [], state),
       \ }
   " 删除 autocmd BufEnter 默认自带的切换当天路径导致的报错, 这个临时文件没有路径
-  autocmd!
+  autocmd FileType goterm autocmd!
 
   let state.id = termopen(a:cmd, job)
   let state.termwinid = win_getid(winnr())
