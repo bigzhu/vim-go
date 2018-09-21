@@ -37,10 +37,16 @@ function! go#term#newmode(bang, cmd, mode) abort
   "
   " Don't set an on_stderr, because it will be passed the same data as
   " on_stdout. See https://github.com/neovim/neovim/issues/2836
+  "let job = {
+  "      \ 'on_stdout': function('s:on_stdout', [], state),
+  "      \ 'on_exit' : function('s:on_exit', [], state),
+  "    \ }
+  "    剔除自动退出和错误检查导致的报错
   let job = {
         \ 'on_stdout': function('s:on_stdout', [], state),
-        \ 'on_exit' : function('s:on_exit', [], state),
       \ }
+  " 删除 autocmd BufEnter 默认自带的切换当天路径导致的报错, 这个临时文件没有路径
+  autocmd!
 
   let state.id = termopen(a:cmd, job)
   let state.termwinid = win_getid(winnr())
